@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 
 const RoomSchema = new mongoose.Schema({
-  name: { type: String, lowercase: true, unique: true },
-  topic: String,
-  users: [user],
-  messages: [message],
-  created_at: Date,
-  updated_at: { type: Date, default: Date.now },
-});
+  roomName: { type: String, lowercase: true, unique: true },
+  isGroupChat: { type: Boolean, default: false },
+  users: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+  latestMessage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "message",
+  },
+  groupAdmin: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+},{ timestamps: true, versionKey: false });
 
 module.exports = mongoose.model("Room", RoomSchema);
+

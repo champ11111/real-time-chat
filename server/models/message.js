@@ -6,14 +6,13 @@ const MessageSchema = new mongoose.Schema({
     ref: "Room",
     required: true,
   },
-  user: {
+  sender: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
-  message_body: String,
-  message_status: { type: Boolean, default: false },
-  created_at: { type: Date, default: Date.now },
-});
+  content: { type: String, trim: true },
+},
+{ timestamps: true, versionKey: false });
 
 module.exports = mongoose.model("Message", MessageSchema);
