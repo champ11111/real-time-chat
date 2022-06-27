@@ -101,3 +101,21 @@ exports.logout = async (req, res, next) => {
     data: {},
   });
 };
+
+exports.getUser = async (req, res) => {
+  try {
+    let user = await User.find(req.params.id).lean().exec();
+    return res.status(200).send(user);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    let user = await User.findByIdAndDelete(req.params.id).lean().exec();
+    return res.status(200).send(user);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+}
