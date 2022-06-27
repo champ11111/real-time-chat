@@ -1,35 +1,24 @@
 exports.socketIo = (io) => {
-  io.on("connect", (socket) => {
-    console.log("Client connected");
-
-    socket.on("join", ({ socketUserName, socketRoom }, callback) => {
-      console.log(`user here name ${socketUserName} and room ${socketRoom}`);
-
-      socket.emit("message", {
-        user: "admin",
-        text: `${socketUserName}, welcome to the room ${socketRoom}`,
-      });
-
-      socket.broadcast.to(socketRoom).emit("message", {
-        user: "admin",
-        text: `${socketUserName} has joined the room`,
-      });
-
-      socket.join(socketRoom);
-
-      callback();
+  io.on("connection", (socket) => {
+    socket.on("setup", (userData) => {
+      socket.join(userData._id);
+      socket.emit("connected");
     });
 
-    socket.on("sendMessage", (message, callback) => {
-      const user = getUser(socket.id);
-
-      io.to(user.room).emit("message", { user: user.name, text: message });
-
-      callback();
+    socket.on("join chat", (room) => {
+      socket.join(room);
     });
 
-    socket.on("disconnect", () => {
-      console.log("Client disconnected");
+    socket.on("new message", (receivedMessage) => {
+      var chat = receivedMessage.chat;
+      chat.users.forEach((user) => {
+        if (user == receivedMessage.sender._id) return;
+        socket.in(user).emit("message recieved", receivedMessage);
+      });
+    });
+
+    socket.off("setup", () => {
+      socket.leave(userData._id);
     });
   });
 };
