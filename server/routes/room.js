@@ -6,3 +6,5 @@ const router = express.Router();
 
 router.route("/").get(getRooms).post(createRoom);
 router.route("/:id").get(getRoom);
+
+module.exports = router;

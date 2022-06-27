@@ -89,19 +89,18 @@ const Message = require("../models/Message");
 //   }
 // };
 
-
 exports.getAllMessageByChatId = async (req, res) => {
   try {
     const messages = await Message.find({ chat: req.params.roomId })
-    .populate("sender", "name profilePic email")
-    .populate("room")
-    .lean()
-    .exec();
+      .populate("sender", "name profilePic email")
+      .populate("room")
+      .lean()
+      .exec();
     return res.status(200).send(messages);
   } catch (error) {
     return res.status(400).send(error.messages);
   }
-}
+};
 
 //Post create new message
 exports.createMessage = async (req, res) => {
@@ -109,7 +108,7 @@ exports.createMessage = async (req, res) => {
   if (!content || !roomId) {
     return res.status(400).send("Invalid data passed into request");
   }
-  
+
   var newMessage = {
     sender: req.user._id,
     content: content,
@@ -118,24 +117,24 @@ exports.createMessage = async (req, res) => {
   try {
     var message = await Message.create(newMessage);
     message = Message.findOne({ _id: message._id })
-    .populate("sender", "name profilePic")
-    .populate("room")
-    .lean()
-    .exec();
+      .populate("sender", "name profilePic")
+      .populate("room")
+      .lean()
+      .exec();
     message = await user.populate(message, {
       path: "room.users",
       select: "name profilePic email",
     });
-    
+
     let data = await Room.findByIdAndUpdate(req.body.roomId, {
       latestMessage: message._id,
     });
-    
+
     return res.status(200).send(message);
   } catch (error) {
     res.status(400).send(error.message);
   }
-}
+};
 
 exports.deleteMessage = async (req, res, next) => {
   try {
@@ -154,4 +153,3 @@ exports.deleteMessage = async (req, res, next) => {
       .json({ success: false, message: "Cannot delete message" });
   }
 };
-module.exports = router;
