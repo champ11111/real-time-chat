@@ -5,13 +5,13 @@ exports.socketIo = (io) => {
       socket.emit("connected");
     });
 
-    socket.on("join chat", (room) => {
+    socket.on("join room", (room) => {
       socket.join(room);
     });
 
     socket.on("new message", (receivedMessage) => {
-      var chat = receivedMessage.chat;
-      chat.users.forEach((user) => {
+      var room = receivedMessage.room;
+      room.users.forEach((user) => {
         if (user == receivedMessage.sender._id) return;
         socket.in(user).emit("message recieved", receivedMessage);
       });

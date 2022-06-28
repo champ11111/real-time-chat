@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user");
 
 //@ des     Register a user
 //@ route   POST /api/v1/auth/register
@@ -118,4 +118,4 @@ exports.deleteUser = async (req, res) => {
   } catch (err) {
     return res.status(500).send(err.message);
   }
-}
+};

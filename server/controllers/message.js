@@ -1,4 +1,4 @@
-const Message = require("../models/Message");
+const Message = require("../models/message");
 
 // exports.getAllMessagesByUserId = async (req, res, next) => {
 //   try {
@@ -89,9 +89,9 @@ const Message = require("../models/Message");
 //   }
 // };
 
-exports.getAllMessageByChatId = async (req, res) => {
+exports.getAllMessageByRoomId = async (req, res) => {
   try {
-    const messages = await Message.find({ chat: req.params.roomId })
+    const messages = await Message.find({ room: req.params.roomId })
       .populate("sender", "name profilePic email")
       .populate("room")
       .lean()
