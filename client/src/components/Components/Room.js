@@ -1,8 +1,15 @@
 import React from "react";
-import Chat from './Chat'
+import { useSelector, useDispatch } from "react-redux";
+
+import Chat from "./Chat";
 import HistoryChat from "./HistoryChat";
 
+import { increment } from "../../actions";
+
 const Room = () => {
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter);
+
   return (
     <div class="flex-col container max-w-screen h-screen bg-gray-100">
       <div class=" border rounded grid grid-cols-4">
@@ -15,7 +22,10 @@ const Room = () => {
             />
             <p class="text-3xl font-bold pt-3">CHAMPCHAT</p>
           </div>
-
+          <p>{counter}</p>
+          <button type="button" onClick={() => dispatch(increment())}>
+            Increment
+          </button>
           <div class="mx-3 mb-3 mt-2 flex justify-between items-center">
             <div class="relative text-gray-600 w-full">
               <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -42,17 +52,52 @@ const Room = () => {
             {/* <p class ="ml-2 text-yellow-500 font-bold text-sm">manage</p> */}
           </div>
 
-        <div class ="overflow-scroll h-[40rem]">
-              <HistoryChat chat = {{text :"bye see you later",time : 25}} name = {"John Don"} profilePicture ={"https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"}/>
-              <HistoryChat chat = {{text :"good morning my name is", time : 50}} name = {"emma"} profilePicture ={"https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"}/>
-              <HistoryChat chat = {{text :"good morning", time : 50}} name = {"emma"} profilePicture ={"https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"}/>
-              <HistoryChat chat = {{text :"good morning", time : 50}} name = {"emma"} profilePicture ={"https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"}/>
-              <HistoryChat chat = {{text :"bye",time : 25}} name = {"John Don"} profilePicture ={"https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"}/>
-        </div>
+          <div class="overflow-scroll h-[40rem]">
+            <HistoryChat
+              chat={{ text: "bye see you later", time: 25 }}
+              name={"John Don"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
+              }
+            />
+            <HistoryChat
+              chat={{ text: "good morning my name is", time: 50 }}
+              name={"emma"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+              }
+            />
+            <HistoryChat
+              chat={{ text: "good morning", time: 50 }}
+              name={"emma"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+              }
+            />
+            <HistoryChat
+              chat={{ text: "good morning", time: 50 }}
+              name={"emma"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+              }
+            />
+            <HistoryChat
+              chat={{ text: "bye", time: 25 }}
+              name={"John Don"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
+              }
+            />
+          </div>
         </div>
         <div class="hidden lg:col-span-3 lg:block pt-6">
-          <div class= "border-2 rounded-3xl rounded-b-none bg-white"> 
-            <Chat userName = {"Emma"} profilePicture = {"https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"}/>
+          <div class="border-2 rounded-3xl rounded-b-none bg-white">
+            <Chat
+              userName={"Emma"}
+              profilePicture={
+                "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+              }
+            />
           </div>
         </div>
       </div>
