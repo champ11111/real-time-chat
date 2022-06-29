@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router";
 
 import avatar from "./avatar.png";
 
@@ -30,7 +31,7 @@ const Register = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setRegData((prevRegisterData) => {
+    setRegisterData((prevRegisterData) => {
       return { ...prevRegisterData, [name]: value };
     });
   };
@@ -47,7 +48,7 @@ const Register = () => {
     <div class="bg-grey-lighter min-h-screen flex flex-col">
       <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 class="mb-4 text-3xl text-center">Sign up</h1>
+          <h1 class="mb-4 text-4xl text-center">Sign up</h1>
           <div className="flex flex-col items-center mb-4">
             <div className="profile-pic">
               <input
@@ -62,6 +63,7 @@ const Register = () => {
                   id="photo"
                   src={registerData.pic ? registerData.pic : avatar}
                   className="w-28 h-28"
+                  alt="profile"
                 />
               </label>
             </div>
