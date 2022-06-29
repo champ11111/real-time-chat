@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 import ForgotPassword from "./Auth/ForgotPassword";
-import Room from "./Components/Room";
+import Room from "./Chat/Room";
 
 const AllRoutes = () => {
   return (
