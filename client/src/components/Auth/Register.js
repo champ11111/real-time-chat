@@ -9,9 +9,9 @@ import { authRegister } from "../../actions/auth";
 const Register = () => {
   const { user, loading, error } = useSelector((store) => store.user);
   const [registerData, setRegisterData] = useState({
-    // pic: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
-    pic: "",
-    isAdmin: false,
+    // profilePic: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    profilePic: "",
+    role: "admin",
     name: "",
     email: "",
     password: "",
@@ -23,7 +23,7 @@ const Register = () => {
     const reader = new FileReader();
     reader.onload = (event) => {
       setRegisterData((prevData) => {
-        return { ...prevData, pic: event.target.result };
+        return { ...prevData, profilePic: event.target.result };
       });
     };
     reader.readAsDataURL(file);
@@ -36,8 +36,9 @@ const Register = () => {
     });
   };
   const handleSubmit = () => {
+    console.log("hello", "");
     const url = "http://localhost:5000/api/auth/register";
-    // if (user.pic) regData["pic"] = user.pic;
+    // if (user.profilePic) regData["profilePic"] = user.profilePic;
     dispatch(authRegister(url, registerData));
   };
 
@@ -50,7 +51,7 @@ const Register = () => {
         <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <h1 class="mb-4 text-4xl text-center">Sign up</h1>
           <div className="flex flex-col items-center mb-4">
-            <div className="profile-pic">
+            <div>
               <input
                 onChange={handleInputFile}
                 type="file"
@@ -61,7 +62,9 @@ const Register = () => {
               <label htmlFor="file" id="uploadBtn">
                 <img
                   id="photo"
-                  src={registerData.pic ? registerData.pic : avatar}
+                  src={
+                    registerData.profilePic ? registerData.profilePic : avatar
+                  }
                   className="w-28 h-28"
                   alt="profile"
                 />
@@ -102,13 +105,12 @@ const Register = () => {
             name="confirm_password"
             placeholder="Confirm Password"
             onChange={handleInputChange}
-            value={registerData.password}
           />
 
           <button
             type="submit"
             class="w-full text-center py-3 rounded bg-green text-white hover:bg-gray-700 bg-black focus:outline-none my-1"
-            onSubmit={handleSubmit}
+            onClick={handleSubmit}
           >
             Create Account
           </button>

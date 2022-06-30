@@ -25,11 +25,16 @@ const io = require("socket.io")(server, {
 
 socketIo(io);
 
+app.use(express.json());
 app.use(cors());
 
 app.use("/api/auth", auth);
 app.use("/api/message", message);
 app.use("/api/room", room);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 server.listen(process.env.PORT || 5000, () =>
   console.log(`Server has started.`)

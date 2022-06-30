@@ -15,16 +15,10 @@ export const authLogout = () => ({ type: LOGOUT, payload: {} });
 export const authRegister = (url, user) => async (dispatch) => {
   dispatch(authLoading(true));
   try {
+    console.log("user", user);
     const data = await axios.post(url, user);
-    // let res = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(user),
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    // });
-    // let data = await res.json();
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    console.log(data);
+    localStorage.setItem("userInfo", JSON.stringify(data.user, data.token));
     dispatch(authUser(data));
   } catch (err) {
     dispatch(authLoading(false));
