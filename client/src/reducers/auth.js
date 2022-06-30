@@ -6,10 +6,14 @@ import {
   UPLOAD_PIC,
 } from "../actions/auth";
 
+console.log("hello");
+
 const user = JSON.parse(localStorage.getItem("userInfo")) || {
   user: {},
   token: "",
 };
+
+// const user = {};
 
 const initState = {
   user: user.user,
