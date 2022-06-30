@@ -16,9 +16,11 @@ export const authRegister = (url, user) => async (dispatch) => {
   dispatch(authLoading(true));
   try {
     console.log("user", user);
-    const data = await axios.post(url, user);
+    const res = await axios.post(url, user);
+    console.log("res", res);
+    const data = { user: res.data.user, token: res.data.token };
     console.log(data);
-    localStorage.setItem("userInfo", JSON.stringify(data.user, data.token));
+    localStorage.setItem("userInfo", JSON.stringify(data));
     dispatch(authUser(data));
   } catch (err) {
     dispatch(authLoading(false));

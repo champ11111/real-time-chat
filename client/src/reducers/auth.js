@@ -10,6 +10,7 @@ const user = JSON.parse(localStorage.getItem("userInfo")) || {
   user: {},
   token: "",
 };
+
 const initState = {
   user: user.user,
   loading: false,

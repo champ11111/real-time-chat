@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router";
 
-const login = () => {
+import { authRegister } from "../../actions/auth";
+
+const Login = () => {
+  const { user, loading, error } = useSelector((store) => store.user);
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+
+  const inputChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setLoginData((prevLoginData) => {
+      return { ...prevLoginData, [name]: value };
+    });
+  };
+
+  const submitHandler = () => {
+    const url = "http://localhost:5000/api/auth/login";
+    dispatch(authRegister(url, loginData));
+  };
+
+  if (user._id) {
+    return <Navigate to={"/room"} />;
+  }
+
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -11,6 +38,8 @@ const login = () => {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="email"
             placeholder="Email"
+            value={loginData.email}
+            onChange={inputChangeHandler}
           />
 
           <input
@@ -18,6 +47,8 @@ const login = () => {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="password"
             placeholder="Password"
+            value={loginData.password}
+            onChange={inputChangeHandler}
           />
           <div className="flex justify-end">
             {/* <input class="mr-2 leading-tight" type="checkbox" />
@@ -27,6 +58,7 @@ const login = () => {
           <button
             type="submit"
             class="w-full text-center py-3 rounded bg-green text-white hover:bg-gray-700 bg-black focus:outline-none my-1"
+            onClick={submitHandler}
           >
             Login
           </button>
@@ -46,4 +78,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

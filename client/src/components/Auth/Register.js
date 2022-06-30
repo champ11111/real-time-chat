@@ -18,7 +18,7 @@ const Register = () => {
   });
   const dispatch = useDispatch();
 
-  const handleInputFile = (event) => {
+  const inputFileHandler = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -29,21 +29,19 @@ const Register = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleInputChange = (event) => {
+  const inputChangeHandle = (event) => {
     const { name, value } = event.target;
     setRegisterData((prevRegisterData) => {
       return { ...prevRegisterData, [name]: value };
     });
   };
-  const handleSubmit = () => {
-    console.log("hello", "");
+  const submitHandler = () => {
     const url = "http://localhost:5000/api/auth/register";
-    // if (user.profilePic) regData["profilePic"] = user.profilePic;
     dispatch(authRegister(url, registerData));
   };
 
   if (user._id) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/room"} />;
   }
   return (
     <div class="bg-grey-lighter min-h-screen flex flex-col">
@@ -53,7 +51,7 @@ const Register = () => {
           <div className="flex flex-col items-center mb-4">
             <div>
               <input
-                onChange={handleInputFile}
+                onChange={inputFileHandler}
                 type="file"
                 name=""
                 id="file"
@@ -77,7 +75,7 @@ const Register = () => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="name"
             placeholder="Full Name"
-            onChange={handleInputChange}
+            onChange={inputChangeHandle}
             value={registerData.name}
           />
 
@@ -86,7 +84,7 @@ const Register = () => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="email"
             placeholder="Email"
-            onChange={handleInputChange}
+            onChange={inputChangeHandle}
             value={registerData.email}
           />
 
@@ -95,7 +93,7 @@ const Register = () => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="password"
             placeholder="Password"
-            onChange={handleInputChange}
+            onChange={inputChangeHandle}
             value={registerData.password}
           />
 
@@ -104,13 +102,13 @@ const Register = () => {
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="confirm_password"
             placeholder="Confirm Password"
-            onChange={handleInputChange}
+            onChange={inputChangeHandle}
           />
 
           <button
             type="submit"
             class="w-full text-center py-3 rounded bg-green text-white hover:bg-gray-700 bg-black focus:outline-none my-1"
-            onClick={handleSubmit}
+            onClick={submitHandler}
           >
             Create Account
           </button>
