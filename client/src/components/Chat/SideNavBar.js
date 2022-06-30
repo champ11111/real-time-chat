@@ -1,6 +1,6 @@
 import React from "react";
 
-import HistoryChat from "./HistoryChat";
+import RecentChat from "./RecentChat";
 
 const SideNavbar = () => {
   return (
@@ -40,35 +40,35 @@ const SideNavbar = () => {
       </div>
 
       <div class="overflow-scroll h-[40rem]">
-        <HistoryChat
+        <RecentChat
           chat={{ text: "bye see you later", time: 25 }}
           name={"John Don"}
           profilePicture={
             "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
           }
         />
-        <HistoryChat
+        <RecentChat
           chat={{ text: "good morning my name is", time: 50 }}
           name={"emma"}
           profilePicture={
             "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
           }
         />
-        <HistoryChat
+        <RecentChat
           chat={{ text: "good morning", time: 50 }}
           name={"emma"}
           profilePicture={
             "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
           }
         />
-        <HistoryChat
+        <RecentChat
           chat={{ text: "good morning", time: 50 }}
           name={"emma"}
           profilePicture={
             "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
           }
         />
-        <HistoryChat
+        <RecentChat
           chat={{ text: "bye", time: 25 }}
           name={"John Don"}
           profilePicture={
