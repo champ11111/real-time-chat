@@ -74,7 +74,7 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
       );
       return;
     }
-    dispatch(recentLoding(false));
+    dispatch(recentLoading(false));
     dispatch(
       selectChat({
         isGroupChat: data.isGroupChat,
