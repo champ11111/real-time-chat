@@ -6,7 +6,7 @@ import {
 } from "../actions/recentChat";
 
 const initState = {
-  recent_chat: [],
+  recentChat: [],
   loading: true,
   error: false,
 };
@@ -15,14 +15,14 @@ export const recentChatReducer = (store = initState, { type, payload }) => {
     case ADD_RECENT_CHAT:
       return {
         ...store,
-        recent_chat: payload,
+        recentChat: payload,
         loading: false,
         error: false,
       };
     case NEW_CREATED_CHAT:
       return {
         ...store,
-        recent_chat: [payload, ...store.recent_chat],
+        recentChat: [payload, ...store.recentChat],
         loading: false,
         error: false,
       };
