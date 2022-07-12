@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputEmoji from "react-input-emoji";
 
 import { useDispatch } from "react-redux";
 
@@ -8,10 +9,6 @@ const InputField = ({ roomId, socket, token }) => {
   const dispatch = useDispatch();
 
   const [messageInput, setMessageInput] = useState("");
-
-  const inputChangeHandler = (event) => {
-    setMessageInput(event.target.value);
-  };
 
   const inputSubmitHandler = (event) => {
     dispatch(sendMessageApi(messageInput, roomId, token, socket));
@@ -53,14 +50,13 @@ const InputField = ({ roomId, socket, token }) => {
         </svg>
       </button>
 
-      <input
-        type="text"
-        placeholder="Message"
-        class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-        name="message"
+      <InputEmoji
         value={messageInput}
-        onChange={inputChangeHandler}
+        onChange={setMessageInput}
+        cleanOnEnter
+        onEnter={inputSubmitHandler}
         required
+        placeholder="Type a message"
       />
       <button>
         <svg
