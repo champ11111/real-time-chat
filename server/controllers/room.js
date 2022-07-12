@@ -21,7 +21,7 @@
 
 const express = require("express");
 const Room = require("../models/room");
-const user = require("../models/user");
+const User = require("../models/user");
 
 exports.getUserRoom = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ exports.getUserRoom = async (req, res) => {
       .populate("latestMessage")
       .sort({ updatedAt: -1 })
       .then(async (results) => {
-        results = await user.populate(results, {
+        results = await User.populate(results, {
           path: "latestMessage.sender",
           select: "name pic email",
         });
@@ -41,9 +41,12 @@ exports.getUserRoom = async (req, res) => {
     return res.status(400).send(error.message);
   }
 };
-exports.createRoom = async (req, res) => {
+exports.upsertRoom = async (req, res) => {
   try {
+    console.log(req.body);
     const { userId } = req.body;
+    console.log(req.user);
+    console.log(userId);
     let room = await Room.find({
       isGroupChat: false,
       $and: [
@@ -57,11 +60,13 @@ exports.createRoom = async (req, res) => {
     })
       .populate("users", "-password")
       .populate("latestMessage");
-    room = await user.populate(room[0], {
+    room = await User.populate(room[0], {
       path: "latestMessage.sender",
       select: "name pic email",
     });
-    if (room != undefined) {
+    console.log(room);
+
+    if (room !== undefined) {
       return res.status(200).send(room);
     } else {
       var roomData = {
