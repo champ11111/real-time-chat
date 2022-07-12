@@ -11,7 +11,7 @@ const Register = () => {
   const [registerData, setRegisterData] = useState({
     // profilePic: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     profilePic: "",
-    role: "admin",
+    role: "user",
     name: "",
     email: "",
     password: "",
@@ -63,7 +63,7 @@ const Register = () => {
                   src={
                     registerData.profilePic ? registerData.profilePic : avatar
                   }
-                  className="w-28 h-28"
+                  className="w-28 h-28 rounded-full"
                   alt="profile"
                 />
               </label>

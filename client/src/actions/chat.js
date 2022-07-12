@@ -16,30 +16,37 @@ export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
   dispatch(messageLoading(true));
   const url = `http://localhost:5000/api/message/${id}`;
   try {
-    const data = await axios.get(url, {
+    const res = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     socket.emit("join room", id);
-    dispatch(addMessage(data));
+    dispatch(addMessage(res.data));
   } catch (err) {
     console.log(err);
     dispatch(messageError(true));
   }
 };
 
-export const sendMessageApi = (msg, token, socket) => async (dispatch) => {
-  const url = `http://localhost:5000/api/message`;
-  try {
-    const data = await axios.post(url, msg, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    socket.emit("new message", data);
-    dispatch(sendMessage(data));
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+export const sendMessageApi =
+  (content, roomId, token, socket) => async (dispatch) => {
+    const url = `http://localhost:5000/api/message`;
+    try {
+      const res = await axios.post(
+        url,
+        { content, roomId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data);
+      socket.emit("new message", data);
+      dispatch(sendMessage(data));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };

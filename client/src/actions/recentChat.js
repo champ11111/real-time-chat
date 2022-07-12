@@ -1,5 +1,5 @@
 import axios from "axios";
-import { selectChat } from "../Chatting/action";
+import { selectChat } from "../actions/chat";
 
 export const RECENT_LOADING = "RECENT_LOADING";
 export const RECENT_ERROR = "RECENT_ERROR";
@@ -17,17 +17,17 @@ export const newCreatedChat = (payload) => ({
   payload,
 });
 
-export const makeRecentChatApi = (token) => async (dispatch) => {
+export const fetchRecentChat = (token) => async (dispatch) => {
   recentLoading(true);
   const url = "http://localhost:5000/api/room/";
   try {
-    const data = await axios.get(url, {
+    const res = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
-    dispatch(recentChatResult(data));
+    console.log(res.data);
+    dispatch(recentChatResult(res.data));
   } catch (err) {
     dispatch(recentError(true));
     console.log(err.message);
@@ -38,11 +38,15 @@ export const makeNewGroup = (groupData, token) => async (dispatch) => {
   recentLoading(true);
   const url = "http://localhost:5000/api/group/";
   try {
-    const data = await axios.post(url, groupData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const data = await axios.post(
+      url,
+      { groupData },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(data);
     dispatch(newCreatedChat(data));
   } catch (err) {
@@ -55,21 +59,28 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
   dispatch(recentLoading(true));
   const url = "http://localhost:5000/api/room/";
   try {
-    const data = await axios.post(url, userId, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(data);
+    console.log("userId is", userId);
+    const res = await axios.post(
+      url,
+      { userId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = res.data;
+    console.log("hello");
+    console.log(res);
     if (!recentChat.find((e) => e._id === data._id)) {
       dispatch(newCreatedChat(data));
       dispatch(
         selectChat({
           isGroupChat: data.isGroupChat,
           index: 0,
-          user: data.users.find((e) => e._id == userId),
+          user: data.users.find((e) => e._id === userId),
           _id: data._id,
-          chatName: data.chatName,
+          roomName: data.roomName,
         })
       );
       return;
@@ -79,7 +90,7 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
       selectChat({
         isGroupChat: data.isGroupChat,
         index: 0,
-        user: data.users.find((el) => el._id == userId),
+        user: data.users.find((el) => el._id === userId),
         _id: data._id,
         chatName: data.chatName,
       })
