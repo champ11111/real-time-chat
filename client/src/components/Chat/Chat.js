@@ -15,7 +15,7 @@ const isSameSender = (user, message) => {
   return user._id === message.sender._id;
 };
 
-const Chat = (props) => {
+const Chat = () => {
   const { user, token } = useSelector((state) => state.user);
   const { messages, loading } = useSelector((state) => state.chatting);
   const {
@@ -29,7 +29,6 @@ const Chat = (props) => {
 
   const dispatch = useDispatch();
 
-  // const scrollChat = createRef();
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -49,13 +48,6 @@ const Chat = (props) => {
 
     currentChattingUser = _id;
   }, [_id]);
-
-  // useEffect(() => {
-  //   const scrollToBottom = (scrollChat) => {
-  //     scrollChat.current.scrollTop = scrollChat.current.scrollHeight;
-  //   };
-  //   scrollToBottom(scrollChat);
-  // });
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
@@ -77,10 +69,7 @@ const Chat = (props) => {
             </span>
           </div>
 
-          <div
-            class="relative w-full p-6 overflow-y-auto h-[40rem] "
-            ref={bottomRef}
-          >
+          <div class="relative w-full p-6 overflow-y-auto h-[40rem] ">
             <ul class="space-y-2">
               <h1 className="flex justify-center text-gray-400 text-opacity-80 font-light">
                 Chat started
@@ -103,6 +92,7 @@ const Chat = (props) => {
                       />
                     );
                   })}
+              <div ref={bottomRef} />
             </ul>
           </div>
           <InputField roomId={_id} socket={socket} token={token} />
