@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
-const InputField = () => {
+import { useDispatch } from "react-redux";
+
+import { sendMessageApi } from "../../actions/chat";
+
+const InputField = ({ roomId, socket, token }) => {
+  const dispatch = useDispatch();
+
+  const [messageInput, setMessageInput] = useState("");
+
+  const inputChangeHandler = (event) => {
+    setMessageInput(event.target.value);
+  };
+
+  const inputSubmitHandler = (event) => {
+    dispatch(sendMessageApi(messageInput, roomId, token, socket));
+    setMessageInput("");
+  };
+
   return (
     <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
       <button>
@@ -41,6 +58,8 @@ const InputField = () => {
         placeholder="Message"
         class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
         name="message"
+        value={messageInput}
+        onChange={inputChangeHandler}
         required
       />
       <button>
@@ -59,7 +78,7 @@ const InputField = () => {
           />
         </svg>
       </button>
-      <button type="submit">
+      <button type="submit" onClick={inputSubmitHandler}>
         <svg
           class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
           xmlns="http://www.w3.org/2000/svg"
