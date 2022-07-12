@@ -62,7 +62,7 @@ const Chat = () => {
             <img
               class="object-cover w-10 h-10 rounded-full"
               src={isGroupChat ? "" : profilePic}
-              alt="username"
+              alt="profile"
             />
             <span class="block ml-2 pb-2 font-bold text-gray-600">
               {isGroupChat ? roomName : name}

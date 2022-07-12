@@ -14,8 +14,11 @@ const AdminRoom = () => {
   const { chatting } = useSelector((store) => store.chatting);
   const { recentChat } = useSelector((store) => store.recentChat);
 
-  const clickChatHandler = (event) => {
-    dispatch(accessChat(event.target.id, token, recentChat));
+  const clickChatHandler = ({ roomId, chattingUserId }) => {
+    if (chatting._id === roomId) {
+      return;
+    }
+    dispatch(accessChat(chattingUserId, token, recentChat));
   };
 
   if (!user._id) {

@@ -2,7 +2,7 @@ const express = require("express");
 
 const {
   getUserRoom,
-  createRoom,
+  upsertRoom,
   createGroup,
   renameRoom,
   addMember,
@@ -12,7 +12,7 @@ const { protect } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.route("/").get(protect, getUserRoom).post(protect, createRoom);
+router.route("/").get(protect, getUserRoom).post(protect, upsertRoom);
 router.route("/group").post(protect, createGroup);
 router.route("/rename").put(renameRoom);
 router.route("/addmember").put(addMember);
