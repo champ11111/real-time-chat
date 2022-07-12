@@ -1,4 +1,6 @@
 const Message = require("../models/message");
+const User = require("../models/user");
+const Room = require("../models/room");
 
 // exports.getAllMessagesByUserId = async (req, res, next) => {
 //   try {
@@ -104,6 +106,7 @@ exports.getAllMessageByRoomId = async (req, res) => {
 
 //Post create new message
 exports.createMessage = async (req, res) => {
+  console.log(req.body);
   const { content, roomId } = req.body;
   if (!content || !roomId) {
     return res.status(400).send("Invalid data passed into request");
@@ -116,12 +119,12 @@ exports.createMessage = async (req, res) => {
   };
   try {
     var message = await Message.create(newMessage);
-    message = Message.findOne({ _id: message._id })
+    message = await Message.findOne({ _id: message._id })
       .populate("sender", "name profilePic")
       .populate("room")
       .lean()
       .exec();
-    message = await user.populate(message, {
+    message = await User.populate(message, {
       path: "room.users",
       select: "name profilePic email",
     });
