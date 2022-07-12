@@ -9,7 +9,7 @@ const OtherMessage = (props) => {
         alt="profile"
       />
       <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow ml-3">
-        <span class="block">{props.text}</span>
+        <span class="block break-words">{props.text}</span>
       </div>
     </li>
   );
