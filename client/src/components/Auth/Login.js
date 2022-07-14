@@ -51,22 +51,22 @@ const Login = () => {
             onChange={inputChangeHandler}
           />
           <div className="flex justify-end">
-            {/* <input class="mr-2 leading-tight" type="checkbox" />
-            <span class="text-sm">Remember Me</span> */}
+            {/* <input className="mr-2 leading-tight" type="checkbox" />
+            <span className="text-sm">Remember Me</span> */}
             <a href="../forgot-password/">Forgot Password?</a>
           </div>
           <button
             type="submit"
-            class="w-full text-center py-3 rounded bg-green text-white hover:bg-gray-700 bg-black focus:outline-none my-1"
+            className="w-full text-center py-3 rounded bg-green text-white hover:bg-gray-700 bg-black focus:outline-none my-1"
             onClick={submitHandler}
           >
             Login
           </button>
         </div>
-        <div class="text-grey-dark mt-6">
+        <div className="text-grey-dark mt-6">
           Don't have an account yet?<span> </span>
           <a
-            class="no-underline border-b border-blue-500 text-blue-500"
+            className="no-underline border-b border-blue-500 text-blue-500"
             href="../register/"
           >
             Sign up

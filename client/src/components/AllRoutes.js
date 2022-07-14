@@ -3,8 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 import ForgotPassword from "./Auth/ForgotPassword";
-import AdminRoom from "./Chat/AdminRoom";
-import UserRoom from "./Chat/UserRoom";
+import AdminRoom from "./Chat/AdminChat/AdminRoom";
+import UserRoom from "./Chat/UserChat/UserRoom";
 
 const AllRoutes = () => {
   return (
