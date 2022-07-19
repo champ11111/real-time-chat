@@ -15,6 +15,9 @@ export const authLogout = () => ({ type: LOGOUT, payload: {} });
 export const authRegister = (url, user) => async (dispatch) => {
   dispatch(authLoading(true));
   try {
+    if (!user.profilePic)
+      user.profilePic =
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
     console.log("user", user);
     const res = await axios.post(url, user);
     console.log("res", res);

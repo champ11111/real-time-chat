@@ -41,7 +41,7 @@ const Register = () => {
   };
 
   if (user._id) {
-    return <Navigate to={"/room"} />;
+    return <Navigate to={"/userroom"} />;
   }
 
   return (

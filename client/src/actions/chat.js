@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { accessChat } from "./recentChat";
+
 export const SELECT_CHAT = "SELECT_CHAT";
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const MESSAGE_LOADING = "MESSAGE_LOADING";
@@ -15,6 +17,7 @@ export const sendMessage = (payload) => ({ type: SEND_MESSAGE, payload });
 export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
   dispatch(messageLoading(true));
   const url = `http://localhost:5000/api/message/${id}`;
+  console.log("hello");
   try {
     const res = await axios.get(url, {
       headers: {
@@ -22,6 +25,7 @@ export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
       },
     });
     socket.emit("join room", id);
+    console.log(res.data);
     dispatch(addMessage(res.data));
   } catch (err) {
     console.log(err);

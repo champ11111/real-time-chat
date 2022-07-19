@@ -70,9 +70,7 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
       }
     );
     const data = res.data;
-    console.log("hello");
-    console.log(res);
-    if (!recentChat.find((e) => e._id === data._id)) {
+    if (recentChat && !recentChat.find((e) => e._id === data._id)) {
       dispatch(newCreatedChat(data));
       dispatch(
         selectChat({
@@ -83,9 +81,10 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
           roomName: data.roomName,
         })
       );
-      return;
+      return data._id;
     }
     dispatch(recentLoading(false));
+    console.log("recentChat is", data);
     dispatch(
       selectChat({
         isGroupChat: data.isGroupChat,
@@ -95,6 +94,7 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
         chatName: data.chatName,
       })
     );
+    return data._id;
   } catch (err) {
     dispatch(recentError(true));
     console.log(err.message);

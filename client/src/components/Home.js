@@ -5,10 +5,6 @@ import { Navigate } from "react-router";
 const Home = () => {
   const { user } = useSelector((store) => store.user);
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
   if (user.role === "user") {
     return <Navigate to="/userroom" />;
   }
@@ -17,7 +13,7 @@ const Home = () => {
     return <Navigate to="/room" />;
   }
 
-  return <div>Home</div>;
+  return <Navigate to="/login" />;
 };
 
 export default Home;
