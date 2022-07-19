@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
+import Home from "./Home";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 import ForgotPassword from "./Auth/ForgotPassword";
@@ -10,6 +11,7 @@ const AllRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
