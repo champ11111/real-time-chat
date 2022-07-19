@@ -56,7 +56,7 @@ const InputField = ({ roomId, socket, token }) => {
           />
         </svg>
       </button>
-
+      {/* <div className="max-h-[20px] w-[220px]"> */}
       <InputEmoji
         value={messageInput}
         onChange={setMessageInput}
@@ -64,7 +64,10 @@ const InputField = ({ roomId, socket, token }) => {
         onEnter={inputSubmitHandler}
         required
         placeholder="Type a message"
+        fontSize="0.8rem"
+        borderRadius="0.8rem"
       />
+      {/* </div> */}
       <button>
         <svg
           xmlns="http://www.w3.org/2000/svg"

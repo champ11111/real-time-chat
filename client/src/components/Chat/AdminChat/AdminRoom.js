@@ -5,14 +5,14 @@ import { Navigate } from "react-router";
 import Chat from "./Chat";
 import SideNavbar from "./SideNavbar";
 
-import { selectChat } from "../../../actions/chat";
 import { accessChat } from "../../../actions/recentChat";
 
 const AdminRoom = () => {
   const { user, token, loading, error } = useSelector((store) => store.user);
-  const dispatch = useDispatch();
   const { chatting } = useSelector((store) => store.chatting);
   const { recentChat } = useSelector((store) => store.recentChat);
+
+  const dispatch = useDispatch();
 
   const clickChatHandler = ({ roomId, chattingUserId }) => {
     if (chatting._id === roomId) {

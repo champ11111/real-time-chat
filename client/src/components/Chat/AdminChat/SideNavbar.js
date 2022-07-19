@@ -61,8 +61,10 @@ const SideNavbar = (props) => {
         {loading
           ? console.log("loading")
           : recentChat.map((chat) => {
-              const text = chat.latestMessage.content;
-              const date = moment(chat.latestMessage.createdAt).fromNow();
+              const text = chat.latestMessage ? chat.latestMessage.content : "";
+              const date = chat.latestMessage
+                ? moment(chat.latestMessage.createdAt).fromNow()
+                : "";
               const chattingUser = chat.users.find((e) => e._id !== user._id);
 
               return (
