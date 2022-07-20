@@ -64,16 +64,14 @@ const Chat = ({ isExpanded }) => {
               <Spinner />
             </div>
           ) : (
-            messages.map((message) => {
+            messages.map((message, index) => {
               if (isSameSender(user, message))
-                return (
-                  <OwnerMessage text={message.content} key={message._id} />
-                );
+                return <OwnerMessage text={message.content} key={index} />;
               return (
                 <OtherMessage
                   text={message.content}
                   image={message.sender.profilePic}
-                  key={message._id}
+                  key={index}
                 />
               );
             })

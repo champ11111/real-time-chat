@@ -22,7 +22,7 @@ const AdminRoom = () => {
   };
 
   if (!user._id) {
-    return <Navigate to="/register" />;
+    return <Navigate to="/login" />;
   }
 
   if (user.role !== "admin") {

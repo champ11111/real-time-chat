@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Navigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { CgArrowsExpandLeft } from "react-icons/cg";
 import { FaRegWindowMinimize } from "react-icons/fa";
@@ -32,6 +33,10 @@ const UserRoom = () => {
   const expandClickHandler = () => {
     setIsExpanded(!isExpanded);
   };
+
+  if (!user._id) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     //chat at bottom of screen

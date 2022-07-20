@@ -21,7 +21,7 @@ const SideNavbar = (props) => {
     <div className="max-h-screen col-span-1">
       <div className="flex items-center">
         <img
-          className="object-cover w-20 h-20 rounded-full m-5 mb-1 mr-3 shadow"
+          className="object-cover w-[4.5rem] h-[4.5rem] rounded-full m-5 mb-1 mr-3 shadow"
           src={
             // user.profilePic
             // ? user.profilePic

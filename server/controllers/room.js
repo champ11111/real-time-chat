@@ -1,24 +1,3 @@
-// exports.getRooms = async (req, res, next) => {
-//   const rooms = await Room.find({});
-//   res.status(201).json({ success: true, data: rooms });
-// };
-
-// exports.getRoom = async (req, res, next) => {
-//   try {
-//     const room = await Room.findById(req.params.id);
-//     res.status(201).json({ success: true, data: room });
-//   } catch (e) {
-//     return res
-//       .status(500)
-//       .json({ success: false, message: "Cannot find Appointment" });
-//   }
-// };
-
-// exports.createRoom = async (req, res, next) => {
-//   const room = await Room.create(req.body);
-//   res.status(201).json({ success: true, data: room });
-// };
-
 const express = require("express");
 const Room = require("../models/room");
 const User = require("../models/user");
@@ -66,7 +45,7 @@ exports.findOrCreateRoom = async (req, res) => {
       return res.status(200).send(room);
     } else {
       let roomData = {
-        roomName: userId,
+        roomName: "room_" + userId + "_" + req.user._id,
         isGroupChat: false,
         users: [req.user._id, userId],
       };
