@@ -13,10 +13,7 @@ exports.socketIo = (io) => {
 
     socket.on("new message", (receivedMessage) => {
       const room = receivedMessage.room;
-      // room.users.forEach((user) => {
-      //   if (user === receivedMessage.sender._id) return;
-      //   socket.in(user).emit("message received", receivedMessage);
-      // });
+      console.log(`new message to room id ${room}`);
       socket.to(room._id).emit("message received", receivedMessage);
     });
 

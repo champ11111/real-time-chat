@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { CgArrowsExpandLeft } from "react-icons/cg";
+import { FaRegWindowMinimize } from "react-icons/fa";
+import { TbArrowsDiagonalMinimize } from "react-icons/tb";
 
 import Chat from "./Chat";
 
@@ -35,14 +38,14 @@ const UserRoom = () => {
     <div className="w-screen h-screen">
       <img
         onClick={buttonClickHandler}
-        className="object-cover w-14 h-14 rounded-full m-4 ml-1 mb-6 shadow absolute bottom-0 right-0"
+        className="object-cover w-14 h-14 rounded-full m-4 ml-1 mb-6 shadow fixed bottom-0 right-0"
         src={
           "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
         }
         alt="profile"
       />
       <div
-        className={`flex flex-col absolute ${
+        className={`flex flex-col fixed ${
           isExpanded
             ? "ml-[310px] bottom-0 h-[40rem] w-[50rem] "
             : "bottom-0 right-0 h-[30rem] w-[17rem] "
@@ -63,18 +66,26 @@ const UserRoom = () => {
               }
               alt="profile"
             />
-            <h2 className="font-semibold">CHAMPCHAT</h2>
+            <h2 className="font-semibold">CHATSERVICE</h2>
           </div>
 
           <div className="flex items-center">
-            <input
-              className="w-6 bg-black mr-0"
-              onClick={expandClickHandler}
-            ></input>
-            <input
-              className="w-6 bg-red-500 m-2 ml-1"
+            {isExpanded ? (
+              <TbArrowsDiagonalMinimize
+                className="w-6 h-[1.3rem] mr-0"
+                onClick={expandClickHandler}
+              ></TbArrowsDiagonalMinimize>
+            ) : (
+              <CgArrowsExpandLeft
+                className="w-6 mr-0"
+                onClick={expandClickHandler}
+              ></CgArrowsExpandLeft>
+            )}
+
+            <FaRegWindowMinimize
+              className="w-6 h-3 m-2 mt-0 ml-0"
               onClick={minimizeClickHandler}
-            ></input>
+            ></FaRegWindowMinimize>
           </div>
         </div>
 

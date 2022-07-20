@@ -25,6 +25,10 @@ const AdminRoom = () => {
     return <Navigate to="/register" />;
   }
 
+  if (user.role !== "admin") {
+    return <Navigate to="/userroom" />;
+  }
+
   return (
     <div className="flex-col container max-w-screen h-screen bg-gray-100">
       <div className=" border rounded grid grid-cols-4">

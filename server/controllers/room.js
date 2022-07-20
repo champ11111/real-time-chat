@@ -41,12 +41,9 @@ exports.getUserRoom = async (req, res) => {
     return res.status(400).send(error.message);
   }
 };
-exports.upsertRoom = async (req, res) => {
+exports.findOrCreateRoom = async (req, res) => {
   try {
-    console.log(req.body);
     const { userId } = req.body;
-    console.log(req.user);
-    console.log(userId);
     let room = await Room.find({
       isGroupChat: false,
       $and: [
@@ -64,13 +61,12 @@ exports.upsertRoom = async (req, res) => {
       path: "latestMessage.sender",
       select: "name pic email",
     });
-    console.log(room);
 
-    if (room !== undefined) {
+    if (room) {
       return res.status(200).send(room);
     } else {
-      var roomData = {
-        roomName: "sender",
+      let roomData = {
+        roomName: userId,
         isGroupChat: false,
         users: [req.user._id, userId],
       };
@@ -81,8 +77,10 @@ exports.upsertRoom = async (req, res) => {
           "users",
           "-password"
         );
+        console.log(FullRoom);
         return res.status(200).send(FullRoom);
       } catch (error) {
+        console.log(error.message);
         return res.status(400).send(error.message);
       }
     }

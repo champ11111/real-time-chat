@@ -75,7 +75,7 @@ const Chat = () => {
                 Chat started
               </h1>
               {loading
-                ? console.log("loading")
+                ? ""
                 : messages.map((message, index) => {
                     if (isSameSender(user, message))
                       return (

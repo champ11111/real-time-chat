@@ -26,7 +26,6 @@ export const fetchRecentChat = (token) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res.data);
     dispatch(recentChatResult(res.data));
   } catch (err) {
     dispatch(recentError(true));
@@ -47,7 +46,6 @@ export const makeNewGroup = (groupData, token) => async (dispatch) => {
         },
       }
     );
-    console.log(data);
     dispatch(newCreatedChat(data));
   } catch (err) {
     dispatch(recentError(true));
@@ -59,7 +57,6 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
   dispatch(recentLoading(true));
   const url = "http://localhost:5000/api/room/";
   try {
-    console.log("userId is", userId);
     const res = await axios.post(
       url,
       { userId },

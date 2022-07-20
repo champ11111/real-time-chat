@@ -29,7 +29,7 @@ const SideNavbar = (props) => {
           }
           alt="profile"
         />
-        <p className="text-3xl font-bold pt-3">CHAMPCHAT</p>
+        <p className="text-3xl font-bold pt-3">CHATSERVICE</p>
       </div>
       <div className="mx-3 mb-3 mt-2 flex justify-between items-center">
         <div className="relative text-gray-600 w-full">
@@ -59,7 +59,7 @@ const SideNavbar = (props) => {
 
       <div className="overflow-scroll h-[40rem]">
         {loading
-          ? console.log("loading")
+          ? ""
           : recentChat.map((chat) => {
               const text = chat.latestMessage ? chat.latestMessage.content : "";
               const date = chat.latestMessage

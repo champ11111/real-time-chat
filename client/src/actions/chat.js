@@ -17,7 +17,6 @@ export const sendMessage = (payload) => ({ type: SEND_MESSAGE, payload });
 export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
   dispatch(messageLoading(true));
   const url = `http://localhost:5000/api/message/${id}`;
-  console.log("hello");
   try {
     const res = await axios.get(url, {
       headers: {
@@ -25,7 +24,6 @@ export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
       },
     });
     socket.emit("join room", id);
-    console.log(res.data);
     dispatch(addMessage(res.data));
   } catch (err) {
     console.log(err);
@@ -47,7 +45,6 @@ export const sendMessageApi =
         }
       );
       const data = res.data;
-      console.log(data);
       socket.emit("new message", data);
       dispatch(sendMessage(data));
     } catch (err) {

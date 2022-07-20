@@ -5,7 +5,6 @@ const User = require("../models/user");
 //@ access  Public
 exports.register = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { name, email, password, role, profilePic } = req.body;
 
     //Create user
@@ -23,7 +22,6 @@ exports.register = async (req, res, next) => {
 //@ access  Public
 exports.login = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
 
     //Validate email and password

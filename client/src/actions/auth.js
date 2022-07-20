@@ -18,11 +18,8 @@ export const authRegister = (url, user) => async (dispatch) => {
     if (!user.profilePic)
       user.profilePic =
         "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
-    console.log("user", user);
     const res = await axios.post(url, user);
-    console.log("res", res);
     const data = { user: res.data.user, token: res.data.token };
-    console.log(data);
     localStorage.setItem("userInfo", JSON.stringify(data));
     dispatch(authUser(data));
   } catch (err) {
@@ -45,7 +42,6 @@ export const uploadPic = (pic) => async (dispatch) => {
       body: profile,
     });
     let data = await res.json();
-    console.log(data);
     dispatch(actionPic(data.secure_url));
   } catch (error) {
     dispatch(authLoading(false));

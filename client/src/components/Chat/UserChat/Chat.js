@@ -25,7 +25,6 @@ const Chat = ({ isExpanded }) => {
 
   const bottomRef = useRef(null);
 
-  console.log("user is ", user);
   useEffect(() => {
     socket = io(SERVER_URL);
     socket.emit("setup", user);
@@ -48,7 +47,6 @@ const Chat = ({ isExpanded }) => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, chatting]);
 
-  console.log("roomId is", chatting._id);
   return (
     <>
       <div
@@ -61,7 +59,7 @@ const Chat = ({ isExpanded }) => {
             Chat started
           </h2>
           {loading
-            ? console.log("loading")
+            ? ""
             : messages.map((message) => {
                 if (isSameSender(user, message))
                   return (
