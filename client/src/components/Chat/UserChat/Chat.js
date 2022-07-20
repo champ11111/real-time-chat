@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Spinner from "react-spinner-material";
 
 import OtherMessage from "./OtherMessage";
 import OwnerMessage from "./OwnerMessage";
@@ -58,21 +59,25 @@ const Chat = ({ isExpanded }) => {
           <h2 className="flex justify-center text-gray-400 text-opacity-80 font-light">
             Chat started
           </h2>
-          {loading
-            ? ""
-            : messages.map((message) => {
-                if (isSameSender(user, message))
-                  return (
-                    <OwnerMessage text={message.content} key={message._id} />
-                  );
+          {loading ? (
+            <div className="flex flex-col items-center mt-4">
+              <Spinner />
+            </div>
+          ) : (
+            messages.map((message) => {
+              if (isSameSender(user, message))
                 return (
-                  <OtherMessage
-                    text={message.content}
-                    image={message.sender.profilePic}
-                    key={message._id}
-                  />
+                  <OwnerMessage text={message.content} key={message._id} />
                 );
-              })}
+              return (
+                <OtherMessage
+                  text={message.content}
+                  image={message.sender.profilePic}
+                  key={message._id}
+                />
+              );
+            })
+          )}
           <div ref={bottomRef} />
         </ul>
       </div>

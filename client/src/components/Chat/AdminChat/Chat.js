@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import io from "socket.io-client";
+import Spinner from "react-spinner-material";
 
 import OtherMessage from "./OtherMessage";
 import OwnerMessage from "./OwnerMessage";
@@ -74,21 +75,23 @@ const Chat = () => {
               <h1 className="flex justify-center text-gray-400 text-opacity-80 font-light">
                 Chat started
               </h1>
-              {loading
-                ? ""
-                : messages.map((message, index) => {
-                    if (isSameSender(user, message))
-                      return (
-                        <OwnerMessage text={message.content} key={index} />
-                      );
-                    return (
-                      <OtherMessage
-                        text={message.content}
-                        image={message.sender.profilePic}
-                        key={index}
-                      />
-                    );
-                  })}
+              {loading ? (
+                <div className="flex flex-col items-center mt-4">
+                  <Spinner />
+                </div>
+              ) : (
+                messages.map((message, index) => {
+                  if (isSameSender(user, message))
+                    return <OwnerMessage text={message.content} key={index} />;
+                  return (
+                    <OtherMessage
+                      text={message.content}
+                      image={message.sender.profilePic}
+                      key={index}
+                    />
+                  );
+                })
+              )}
               <div ref={bottomRef} />
             </ul>
           </div>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import Spinner from "react-spinner-material";
 
 import RecentChat from "./RecentChat";
 
@@ -58,34 +59,38 @@ const SideNavbar = (props) => {
       </div>
 
       <div className="overflow-scroll h-[40rem]">
-        {loading
-          ? ""
-          : recentChat.map((chat) => {
-              const text = chat.latestMessage ? chat.latestMessage.content : "";
-              const date = chat.latestMessage
-                ? moment(chat.latestMessage.createdAt).fromNow()
-                : "";
-              const chattingUser = chat.users.find((e) => e._id !== user._id);
+        {loading ? (
+          <div className="flex flex-col items-center mt-4">
+            <Spinner />
+          </div>
+        ) : (
+          recentChat.map((chat) => {
+            const text = chat.latestMessage ? chat.latestMessage.content : "";
+            const date = chat.latestMessage
+              ? moment(chat.latestMessage.createdAt).fromNow()
+              : "";
+            const chattingUser = chat.users.find((e) => e._id !== user._id);
 
-              return (
-                <RecentChat
-                  key={chattingUser._id}
-                  id={chattingUser._id}
-                  onChatClick={props.onChatClick}
-                  {...chat}
-                  chat={{
-                    text: text,
-                    time: date,
-                  }}
-                  name={chattingUser.name}
-                  profilePic={
-                    chattingUser.profilePic
-                      ? chattingUser.profilePic
-                      : "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
-                  }
-                />
-              );
-            })}
+            return (
+              <RecentChat
+                key={chattingUser._id}
+                id={chattingUser._id}
+                onChatClick={props.onChatClick}
+                {...chat}
+                chat={{
+                  text: text,
+                  time: date,
+                }}
+                name={chattingUser.name}
+                profilePic={
+                  chattingUser.profilePic
+                    ? chattingUser.profilePic
+                    : "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
+                }
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );

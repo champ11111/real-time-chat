@@ -10,7 +10,11 @@ const OtherMessage = (props) => {
           alt="profile"
         />
         <div className="relative max-w-[160px] px-2 py-2 text-gray-700 bg-gray-100 rounded shadow ml-3">
-          <span className="block break-words text-sm">{props.text}</span>
+          {props.text.search(/data:image/) !== -1 ? (
+            <img src={props.text} className="" alt="profile" />
+          ) : (
+            <span className="block break-words text-sm">{props.text}</span>
+          )}
         </div>
       </li>
     </div>
