@@ -10,6 +10,7 @@ import { fetchRecentChat } from "../../../actions/recentChat";
 const SideNavbar = (props) => {
   const { user, token } = useSelector((state) => state.user);
   const { recentChat, loading } = useSelector((state) => state.recentChat);
+  const [searchInput, setSearchInput] = React.useState("");
 
   const dispatch = useDispatch();
 
@@ -23,10 +24,9 @@ const SideNavbar = (props) => {
         <img
           className="object-cover w-[4.5rem] h-[4.5rem] rounded-full m-5 mb-1 mr-3 shadow"
           src={
-            // user.profilePic
-            // ? user.profilePic
-            // :
-            "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+            user.profilePic
+              ? user.profilePic
+              : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
           }
           alt="profile"
         />
@@ -49,13 +49,13 @@ const SideNavbar = (props) => {
           </span>
           <input
             type="search"
-            className="block w-full py-2 pl-10 bg-white rounded-full outline-none"
+            className="block w-full py-2 pl-10 pr-3 bg-white rounded-full outline-none"
             name="search"
             placeholder="Search"
-            required
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        {/* <p className ="ml-2 text-yellow-500 font-bold text-sm">manage</p> */}
       </div>
 
       <div className="overflow-scroll h-[40rem]">
@@ -70,6 +70,13 @@ const SideNavbar = (props) => {
               ? moment(chat.latestMessage.createdAt).fromNow()
               : "";
             const chattingUser = chat.users.find((e) => e._id !== user._id);
+            if (
+              searchInput &&
+              !chattingUser.name
+                .toLowerCase()
+                .includes(searchInput.toLowerCase(0))
+            )
+              return;
 
             return (
               <RecentChat
