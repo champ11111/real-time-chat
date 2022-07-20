@@ -7,6 +7,7 @@ import OtherMessage from "./OtherMessage";
 import OwnerMessage from "./OwnerMessage";
 import InputField from "./InputField";
 
+import { fetchRecentChat } from "../../../actions/recentChat";
 import { fetchCurrentMessages } from "../../../actions/chat";
 
 const SERVER_URL = "http://localhost:5000";
@@ -38,14 +39,16 @@ const Chat = () => {
     socket.on("connected", () => {
       console.log("user connected");
     });
-    socket.on("message received", (receivedMessage) => {
-      dispatch(fetchCurrentMessages(_id, token, socket));
-    });
   }, []);
 
   useEffect(() => {
     if (!_id) return;
     dispatch(fetchCurrentMessages(_id, token, socket));
+
+    socket.on("message received", (receivedMessage) => {
+      dispatch(fetchCurrentMessages(_id, token, socket));
+      dispatch(fetchRecentChat(token));
+    });
 
     currentChattingUser = _id;
   }, [_id]);

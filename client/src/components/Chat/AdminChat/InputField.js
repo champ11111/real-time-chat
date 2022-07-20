@@ -3,6 +3,7 @@ import InputEmoji from "react-input-emoji";
 
 import { useDispatch } from "react-redux";
 
+import { fetchRecentChat } from "../../../actions/recentChat";
 import { sendMessageApi } from "../../../actions/chat";
 
 const InputField = ({ roomId, socket, token }) => {
@@ -12,6 +13,7 @@ const InputField = ({ roomId, socket, token }) => {
 
   const inputSubmitHandler = (event) => {
     dispatch(sendMessageApi(messageInput, roomId, token, socket));
+    dispatch(fetchRecentChat(token));
     setMessageInput("");
   };
 
