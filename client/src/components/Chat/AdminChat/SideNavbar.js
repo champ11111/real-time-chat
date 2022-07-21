@@ -77,7 +77,7 @@ const SideNavbar = (props) => {
                 .includes(searchInput.toLowerCase(0))
             )
               return;
-
+            if (!chattingUser) return;
             return (
               <RecentChat
                 key={chattingUser._id}
