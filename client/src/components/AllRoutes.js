@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
-import Logout from "./Logout";
+import Logout from "./Auth/Logout";
 import ForgotPassword from "./Auth/ForgotPassword";
 import AdminRoom from "./Chat/AdminChat/AdminRoom";
 import UserRoom from "./Chat/UserChat/UserRoom";
