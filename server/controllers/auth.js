@@ -8,7 +8,13 @@ exports.register = async (req, res, next) => {
     const { name, email, password, role, profilePic } = req.body;
 
     //Create user
-    const user = await User.create({ name, email, password, role, profilePic });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role,
+      profilePic,
+    });
 
     sendTokenResponse(user, 200, res);
   } catch (e) {

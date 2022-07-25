@@ -24,8 +24,12 @@ const Login = () => {
     dispatch(authRegister(url, loginData));
   };
 
-  if (user._id) {
+  if (user.role === "admin") {
     return <Navigate to={"/room"} />;
+  }
+
+  if (user.role === "user") {
+    return <Navigate to={"/userroom"} />;
   }
 
   return (

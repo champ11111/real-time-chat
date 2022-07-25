@@ -81,7 +81,6 @@ export const accessChat = (userId, token, recentChat) => async (dispatch) => {
       return data._id;
     }
     dispatch(recentLoading(false));
-    console.log("recentChat is", data);
     dispatch(
       selectChat({
         isGroupChat: data.isGroupChat,

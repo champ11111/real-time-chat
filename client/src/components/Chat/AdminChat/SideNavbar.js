@@ -7,6 +7,9 @@ import RecentChat from "./RecentChat";
 
 import { fetchRecentChat } from "../../../actions/recentChat";
 
+const ANONYMOUS_PICTURE =
+  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+
 const SideNavbar = (props) => {
   const { user, token } = useSelector((state) => state.user);
   const { recentChat, loading } = useSelector((state) => state.recentChat);
@@ -24,13 +27,13 @@ const SideNavbar = (props) => {
         <img
           className="object-cover w-[4.5rem] h-[4.5rem] rounded-full m-5 mb-1 mr-3 shadow"
           src={
-            user.profilePic
-              ? user.profilePic
+            user.servicePic
+              ? user.servicePic
               : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
           }
           alt="profile"
         />
-        <p className="text-3xl font-bold pt-3">CHATSERVICE</p>
+        <p className="text-3xl font-bold pt-3">{user.serviceName}</p>
       </div>
       <div className="mx-3 mb-3 mt-2 flex justify-between items-center">
         <div className="relative text-gray-600 w-full">
@@ -92,7 +95,7 @@ const SideNavbar = (props) => {
                 profilePic={
                   chattingUser.profilePic
                     ? chattingUser.profilePic
-                    : "https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
+                    : ANONYMOUS_PICTURE
                 }
               />
             );

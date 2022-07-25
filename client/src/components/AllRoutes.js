@@ -4,9 +4,9 @@ import Home from "./Home";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 import Logout from "./Auth/Logout";
-import ForgotPassword from "./Auth/ForgotPassword";
 import AdminRoom from "./Chat/AdminChat/AdminRoom";
 import UserRoom from "./Chat/UserChat/UserRoom";
+import TestChatService from "./Auth/TestChatService";
 
 const AllRoutes = () => {
   return (
@@ -15,7 +15,7 @@ const AllRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/testchat" element={<TestChatService />} />
         <Route path="/room" element={<AdminRoom />} />
         <Route path="/userroom" element={<UserRoom />} />
         <Route path="/logout" element={<Logout />} />

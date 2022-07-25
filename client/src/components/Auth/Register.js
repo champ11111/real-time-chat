@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router";
 
-import avatar from "./avatar.png";
-
 import { authRegister } from "../../actions/auth";
+
+const ANONYMOUS_PICTURE =
+  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
 
 const Register = () => {
   const { user, loading, error } = useSelector((store) => store.user);
@@ -28,7 +29,7 @@ const Register = () => {
     };
     reader.readAsDataURL(file);
   };
-
+  console.log(registerData);
   const inputChangeHandle = (event) => {
     const { name, value } = event.target;
     setRegisterData((prevRegisterData) => {
@@ -62,7 +63,9 @@ const Register = () => {
                 <img
                   id="photo"
                   src={
-                    registerData.profilePic ? registerData.profilePic : avatar
+                    registerData.profilePic
+                      ? registerData.profilePic
+                      : ANONYMOUS_PICTURE
                   }
                   className="w-28 h-28 rounded-full"
                   alt="profile"

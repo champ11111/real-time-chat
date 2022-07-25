@@ -33,6 +33,18 @@ const UserSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
+    serviceId: {
+      type: String,
+    },
+    serviceName: {
+      type: String,
+      default: "ChatService",
+    },
+    servicePic: {
+      type: "String",
+      default:
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

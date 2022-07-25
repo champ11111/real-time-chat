@@ -11,6 +11,8 @@ import { fetchRecentChat } from "../../../actions/recentChat";
 import { fetchCurrentMessages } from "../../../actions/chat";
 
 const SERVER_URL = "http://localhost:5000";
+const ANONYMOUS_PICTURE =
+  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
 let socket, currentChattingUser;
 
 const isSameSender = (user, message) => {
@@ -65,7 +67,7 @@ const Chat = () => {
           <div className="relative flex items-end p-3 pl-6 border-b border-gray-300 h-20">
             <img
               className="object-cover w-10 h-10 rounded-full"
-              src={isGroupChat ? "" : profilePic}
+              src={profilePic ? profilePic : ANONYMOUS_PICTURE}
               alt="profile"
             />
             <span className="block ml-2 pb-2 font-bold text-gray-600">
@@ -89,7 +91,11 @@ const Chat = () => {
                   return (
                     <OtherMessage
                       text={message.content}
-                      image={message.sender.profilePic}
+                      image={
+                        message.sender.profilePic
+                          ? message.sender.profilePic
+                          : ANONYMOUS_PICTURE
+                      }
                       key={index}
                     />
                   );

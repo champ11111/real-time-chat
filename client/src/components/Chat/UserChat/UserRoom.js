@@ -22,7 +22,7 @@ const UserRoom = () => {
   };
 
   useEffect(() => {
-    dispatch(accessChat("62bd4a42275d4f3aa1cb565d", token, ""));
+    dispatch(accessChat(user.serviceId, token, ""));
   }, []);
 
   const minimizeClickHandler = () => {
@@ -44,9 +44,7 @@ const UserRoom = () => {
       <img
         onClick={buttonClickHandler}
         className="object-cover w-14 h-14 rounded-full m-4 ml-1 mb-6 shadow fixed bottom-0 right-0"
-        src={
-          "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-        }
+        src={user.servicePic}
         alt="profile"
       />
       <div
@@ -66,12 +64,10 @@ const UserRoom = () => {
           <div className="flex items-center">
             <img
               className="object-cover w-8 h-8 rounded-full m-2 shadow"
-              src={
-                "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-              }
+              src={user.servicePic}
               alt="profile"
             />
-            <h2 className="font-semibold">CHATSERVICE</h2>
+            <h2 className="font-semibold">{user.serviceName}</h2>
           </div>
 
           <div className="flex items-center">
