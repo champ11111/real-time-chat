@@ -48,7 +48,7 @@ const UserRoom = () => {
         alt="profile"
       />
       <div
-        className={`flex flex-col fixed ${
+        className={`flex flex-col fixed bg-white ${
           isExpanded
             ? "ml-[310px] bottom-0 h-[40rem] w-[50rem] "
             : "bottom-0 right-0 h-[30rem] w-[17rem] "

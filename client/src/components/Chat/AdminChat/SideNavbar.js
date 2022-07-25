@@ -72,7 +72,13 @@ const SideNavbar = (props) => {
             const date = chat.latestMessage
               ? moment(chat.latestMessage.createdAt).fromNow()
               : "";
-            const chattingUser = chat.users.find((e) => e._id !== user._id);
+
+            let chattingUser = chat.users.find((e) => e._id !== user._id);
+
+            //when chatting with yourself
+            if (chat.users[0]._id === chat.users[1]._id)
+              chattingUser = chat.users[0];
+
             if (
               searchInput &&
               !chattingUser.name

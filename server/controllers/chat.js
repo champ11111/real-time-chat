@@ -23,7 +23,7 @@ exports.getAdminRoom = async (req, res) => {
 
 exports.accessChat = async (req, res) => {
   try {
-    const {
+    let {
       name,
       email,
       password,
@@ -33,6 +33,8 @@ exports.accessChat = async (req, res) => {
       servicePic,
       serviceName,
     } = req.body;
+
+    if (!password) password = process.env.CHAT_DEFAULT_PASSWORD;
 
     //Validate email and password
     if (!email || !password) {
@@ -94,7 +96,6 @@ exports.accessChat = async (req, res) => {
         .status(400)
         .json({ success: false, error: "Invalid credentials" });
     }
-
     await findOrCreateRoom(user.id, admin.id, req, res);
     sendTokenResponse(user, 200, res);
   } catch (err) {
@@ -149,13 +150,13 @@ const findOrCreateRoom = async (userId, adminId, req, res) => {
     });
 
     if (room) {
+      return;
     } else {
       let roomData = {
         roomName: "room_" + adminId + "_" + userId,
         isGroupChat: false,
         users: [userId, adminId],
       };
-
       try {
         const createdRoom = await Room.create(roomData);
         const FullRoom = await Room.findOne({ _id: createdRoom._id }).populate(

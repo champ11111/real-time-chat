@@ -22,7 +22,8 @@ exports.getUserRoom = async (req, res) => {
 };
 exports.findOrCreateRoom = async (req, res) => {
   try {
-    const { userId } = req.body;
+    let { userId } = req.body;
+    if (!userId) userId = req.user._id;
     let room = await Room.find({
       isGroupChat: false,
       $and: [
@@ -51,13 +52,13 @@ exports.findOrCreateRoom = async (req, res) => {
       };
 
       try {
-        const createdRoom = await Room.create(roomData);
-        const FullRoom = await Room.findOne({ _id: createdRoom._id }).populate(
-          "users",
-          "-password"
-        );
-        console.log(FullRoom);
-        return res.status(200).send(FullRoom);
+        // const createdRoom = await Room.create(roomData);
+        // const FullRoom = await Room.findOne({ _id: createdRoom._id }).populate(
+        //   "users",
+        //   "-password"
+        // );
+        // console.log(FullRoom);
+        // return res.status(200).send(FullRoom);
       } catch (error) {
         console.log(error.message);
         return res.status(400).send(error.message);
