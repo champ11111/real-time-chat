@@ -27,7 +27,7 @@ const root = ReactDOM.createRoot(document.getElementById("chatSection"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <AdminRoom />
+    <UserRoom />
   </Provider>
   // </React.StrictMode>
 );

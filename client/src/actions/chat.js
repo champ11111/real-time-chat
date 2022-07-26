@@ -16,7 +16,7 @@ export const sendMessage = (payload) => ({ type: SEND_MESSAGE, payload });
 
 export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
   dispatch(messageLoading(true));
-  const url = `http://localhost:5000/api/message/${id}`;
+  const url = `https://realtime-chat-express.herokuapp.com/api/message/${id}`;
   try {
     const res = await axios.get(url, {
       headers: {
@@ -33,7 +33,7 @@ export const fetchCurrentMessages = (id, token, socket) => async (dispatch) => {
 
 export const sendMessageApi =
   (content, roomId, token, socket) => async (dispatch) => {
-    const url = `http://localhost:5000/api/message`;
+    const url = `https://realtime-chat-express.herokuapp.com/api/message`;
     try {
       const res = await axios.post(
         url,

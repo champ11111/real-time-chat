@@ -19,7 +19,7 @@ export const newCreatedChat = (payload) => ({
 
 export const fetchRecentChat = (token) => async (dispatch) => {
   recentLoading(true);
-  const url = "http://localhost:5000/api/room/";
+  const url = "https://realtime-chat-express.herokuapp.com/api/room/";
   try {
     const res = await axios.get(url, {
       headers: {
@@ -35,7 +35,7 @@ export const fetchRecentChat = (token) => async (dispatch) => {
 
 export const makeNewGroup = (groupData, token) => async (dispatch) => {
   recentLoading(true);
-  const url = "http://localhost:5000/api/group/";
+  const url = "https://realtime-chat-express.herokuapp.com/api/group/";
   try {
     const data = await axios.post(
       url,
@@ -55,7 +55,7 @@ export const makeNewGroup = (groupData, token) => async (dispatch) => {
 
 export const accessChat = (userId, token, recentChat) => async (dispatch) => {
   dispatch(recentLoading(true));
-  const url = "http://localhost:5000/api/room/";
+  const url = "https://realtime-chat-express.herokuapp.com/api/room/";
   try {
     const res = await axios.post(
       url,

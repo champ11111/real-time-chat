@@ -10,7 +10,7 @@ import InputField from "./InputField";
 import { fetchRecentChat } from "../../../actions/recentChat";
 import { fetchCurrentMessages } from "../../../actions/chat";
 
-const SERVER_URL = "http://localhost:5000";
+const SERVER_URL = "https://realtime-chat-express.herokuapp.com";
 const ANONYMOUS_PICTURE =
   "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
 let socket, currentChattingUser;

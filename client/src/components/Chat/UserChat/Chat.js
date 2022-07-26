@@ -9,7 +9,7 @@ import OwnerMessage from "./OwnerMessage";
 import InputField from "./InputField";
 import { fetchCurrentMessages } from "../../../actions/chat";
 
-const SERVER_URL = "http://localhost:5000";
+const SERVER_URL = "https://realtime-chat-express.herokuapp.com";
 let socket;
 
 const isSameSender = (user, message) => {

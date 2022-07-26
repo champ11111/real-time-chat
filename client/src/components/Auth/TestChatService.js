@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const url = "http://localhost:5000/api/chat/accessChat";
+const url = "https://realtime-chat-express.herokuapp.com/api/chat/accessChat";
 // var data = {
 //   name: "chatadmin",
 //   email: "chatadmin@gmail.com",

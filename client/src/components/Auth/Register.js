@@ -37,7 +37,7 @@ const Register = () => {
     });
   };
   const submitHandler = () => {
-    const url = "http://localhost:5000/api/auth/register";
+    const url = "https://realtime-chat-express.herokuapp.com/api/auth/register";
     dispatch(authRegister(url, registerData));
   };
 

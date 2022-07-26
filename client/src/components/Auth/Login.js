@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   const submitHandler = () => {
-    const url = "http://localhost:5000/api/auth/login";
+    const url = "https://realtime-chat-express.herokuapp.com/api/auth/login";
     dispatch(authRegister(url, loginData));
   };
 
