@@ -1,4 +1,5 @@
 # real-time-chat
+Real time chat app with Node.js, Socket.io and MongoDB
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
